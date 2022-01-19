@@ -1,10 +1,13 @@
 package me.kindeep.thisisacalender;
 
+import static android.view.View.*;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -12,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CalendarView;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -27,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private Date currentDateOnCalender = new Date();
     MeetingsAdapter meetingsAdapter;
     DoubleLayoutManager layoutManager;
+    CheckBox checkMeeting;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +51,8 @@ public class MainActivity extends AppCompatActivity {
         meetingsAdapter = new MeetingsAdapter(data, this);
         meetingsRecyclerList.setAdapter(meetingsAdapter);
 
-        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+
+        findViewById(R.id.button).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent addMeetingIntent = new Intent(MainActivity.this, MeetingActivity.class);
@@ -119,8 +126,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.postpone_today:
                 postponeSelectedDate();
                 break;
-            case R.id.manage_contacts:
-                startActivity(new Intent(MainActivity.this, ContactsActivity.class));
+//            case R.id.manage_contacts:
+//                startActivity(new Intent(MainActivity.this, ContactsActivity.class));
             default:
 
         }

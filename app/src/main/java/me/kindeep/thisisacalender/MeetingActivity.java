@@ -53,7 +53,7 @@ public class MeetingActivity extends AppCompatActivity {
         meeting = (Meeting) savedInstanceState.getSerializable("meeting");
         super.onRestoreInstanceState(savedInstanceState);
         updateMeetingViews();
-        updateContactViews();
+//        updateContactViews();
     }
 
 
@@ -136,7 +136,7 @@ public class MeetingActivity extends AppCompatActivity {
         });
 
         updateMeetingViews();
-        updateContactViews();
+//        updateContactViews();
     }
 
     public void setEndDate(View v) {
@@ -154,21 +154,6 @@ public class MeetingActivity extends AppCompatActivity {
         startActivityForResult(pickContactIntent, PICK_CONTACT_REQUEST);
     }
 
-    public void openContact(View v) {
-        // Open contact using the default contacts viewer
-        if (meeting.getContactId() != null) {
-            try {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                Uri uri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_URI, String.valueOf(meeting.getContactId()));
-                intent.setData(uri);
-                startActivity(intent);
-            } catch (Exception e) {
-                Toast.makeText(this, "Something went wrong with opening the contact.", Toast.LENGTH_SHORT).show();
-            }
-        } else {
-            Toast.makeText(this, "No contact associated with event!", Toast.LENGTH_SHORT).show();
-        }
-    }
 
 
     /**
@@ -234,56 +219,6 @@ public class MeetingActivity extends AppCompatActivity {
         titleEditText.setText(meeting.getTitle());
     }
 
-    void updateContactViews() {
-        if (this.meeting.getContactId() != null) {
-            Contact contact = Data.getContactById(MeetingActivity.this, this.meeting.getContactId());
-            if (contact != null) {
-                contactPhone.setText(contact.getPhone());
-                contactName.setText(contact.getName());
-            }
-        }
-
-        if (meeting.getContactId() == null) {
-            findViewById(R.id.add_contact).setVisibility(View.VISIBLE);
-            findViewById(R.id.contact_parent).setVisibility(View.INVISIBLE);
-        } else {
-            findViewById(R.id.add_contact).setVisibility(View.INVISIBLE);
-            findViewById(R.id.contact_parent).setVisibility(View.VISIBLE);
-
-        }
-    }
-
-    public void deleteContact(View v) {
-        meeting.setContactId(null);
-        updateContactViews();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        // Check which request we're responding to
-        if (requestCode == PICK_CONTACT_REQUEST) {
-            if (resultCode == RESULT_OK) { //User picked a contact; didn't cancel out
-                // The Intent's data Uri identifies which contact was selected.
-
-                String[] projection = {
-                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID
-                };
-
-                Cursor cursor = getContentResolver().query(data.getData(), projection,
-                        null, null, null);
-
-                try {
-                    cursor.moveToFirst();
-                    String id = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.CONTACT_ID));
-                    this.meeting.setContactId(id);
-                } catch (NullPointerException e) {
-                    Log.e("PICK_CONTACT_REQUEST", "Error with picking");
-                }
-            }
-            updateContactViews();
-        }
-    }
 
     public void deleteMeeting(View v) {
         data.deleteMeeting(meeting);

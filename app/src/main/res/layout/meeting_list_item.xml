@@ -20,42 +20,43 @@
     app:layout_constraintLeft_toRightOf="@id/start_text"
     app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:id="@+id/dates"
+
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+    <LinearLayout
+        android:id="@+id/dates"
+        android:layout_width="345dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="right"
+        >
+
+        <TextView
+            android:id="@+id/meeting_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-
-            <TextView
-                android:id="@+id/meeting_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Title"
-                android:textColor="@color/listItemTitle"
-                android:textSize="@dimen/text2" />
+            android:text="일정 제목"
+            android:textColor="@color/listItemTitle"
+            android:textSize="@dimen/text2" />
 
 
-            <TextView
-                android:id="@+id/meeting_start"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="start"
-                android:textColor="@color/listItemText" />
+        <TextView
+            android:id="@+id/meeting_start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="시작 일시"
+            android:textColor="@color/listItemText" />
 
-            <!--        <TextView-->
-            <!--            android:layout_width="match_parent"-->
-            <!--            android:layout_height="wrap_content"-->
-            <!--            android:text="-"-->
-            <!--            android:gravity="center"/>-->
+        <TextView
+            android:id="@+id/meeting_end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="종료 일시"
+            android:textColor="@color/listItemText" />
 
-            <TextView
-                android:id="@+id/meeting_end"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="end"
-                android:textColor="@color/listItemText" />
-
-        </LinearLayout>
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>

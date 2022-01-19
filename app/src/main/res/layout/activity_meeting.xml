@@ -30,7 +30,7 @@
                 android:enabled="false"
                 android:inputType="none"
                 android:textSize="@dimen/text1"
-                tools:text="Meeting name" />
+                tools:text="일정 제목" />
 
             <Button
                 android:id="@+id/edit_meeting_title_btn"
@@ -39,7 +39,7 @@
                 android:layout_gravity="top"
                 android:layout_weight="0"
                 android:textColor="@color/buttonText"
-                android:text="Edit"
+                android:text="수정"
                 android:backgroundTint="@color/colorAccent"
 
                 />
@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:textColor="@color/colorAccent"
                 android:layout_height="wrap_content"
-                android:text="Start: "
+                android:text="시작일시: "
                 android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -100,7 +100,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorAccent"
         android:textStyle="bold"
-        android:text="End: "
+        android:text="종료 일시: "
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -135,126 +135,6 @@
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="1"
-            android:orientation="horizontal"
-            android:id="@+id/contact_constraint"
-            android:layout_marginTop="@dimen/space1"
-            >
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:layout_weight="1"
-                android:text="Contact"
-                android:textSize="@dimen/text2"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                />
-
-            <ImageButton
-                android:id="@+id/add_contact"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="pickContactIntent"
-                android:src="@drawable/ic_add_black_24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:textColor="@color/buttonText"
-                android:backgroundTint="@color/colorAccent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/contact_parent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="openContact"
-            android:clickable="true"
-            android:focusable="false"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:elevation="@dimen/space1"
-            app:contentPaddingBottom="@dimen/space2"
-            app:contentPaddingLeft="@dimen/space2"
-            app:contentPaddingRight="@dimen/space2"
-            android:layout_gravity="center"
-            app:cardCornerRadius="8dip"
-            >
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_gravity="top"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space2"
-                android:orientation="horizontal"
-                android:weightSum="1">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    >
-
-                    <TextView
-                        android:id="@+id/meeting_contact_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="None"
-                        android:textSize="@dimen/text4" />
-
-                    <TextView
-                        android:id="@+id/meeting_contact_number"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="" />
-                </LinearLayout>
-
-                <ImageButton
-                    app:layout_constraintRight_toLeftOf="@id/delete_contact_btn"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:id="@+id/edit_contact_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="0dp"
-                    android:layout_weight="0"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:onClick="pickContactIntent"
-                    android:src="@drawable/ic_edit_white_24dp"
-                    android:backgroundTint="@color/colorAccent"
-                    android:text="Edit" />
-
-                <ImageButton
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:id="@+id/delete_contact_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="0dp"
-                    android:layout_weight="0"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:onClick="deleteContact"
-                    android:src="@drawable/ic_delete_black_24dp"
-                    android:backgroundTint="@color/colorAccent"
-
-                    android:text="Edit" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
-
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -267,7 +147,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/affirmative"
-            android:text="Done"
+            android:text="완료"
             android:textColor="@color/textLight"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -279,7 +159,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/negative"
             android:onClick="deleteMeeting"
-            android:text="Delete"
+            android:text="삭제"
             android:textColor="@color/textLight"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/cancel_edit_meeting_btn"
@@ -291,7 +171,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/buttonText"
             android:onClick="cancelEditMeeting"
-            android:text="Cancel"
+            android:text="취소"
             android:backgroundTint="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

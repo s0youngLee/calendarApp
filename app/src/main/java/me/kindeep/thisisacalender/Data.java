@@ -94,7 +94,7 @@ public class Data extends SQLiteOpenHelper {
 
         for (Meeting meeting : getMeetingList()) {
             if (meeting.getContactId() != null) {
-                if(!set.contains(meeting.getContactId())) {
+                if (!set.contains(meeting.getContactId())) {
                     result.add(meeting);
                     set.add(meeting.getContactId());
                 }
@@ -127,16 +127,6 @@ public class Data extends SQLiteOpenHelper {
         dataChanger.delete(DB_TABLE, MEETING_ID + "=?", new String[]{name.getMeetingId()});
     }
 
-    public void removeContact(Contact contact) {
-        for(Meeting meeting: getMeetingList()) {
-            if(meeting.getContactId() != null) {
-                if(meeting.getContactId().equals(contact.getContactId())) {
-                    meeting.setContactId(null);
-                    addOrUpdateMeeting(meeting);
-                }
-            }
-        }
-    }
 
     // TODO: convert to a query?
     public int getIndexForDate(Date date) {
@@ -164,16 +154,6 @@ public class Data extends SQLiteOpenHelper {
         }
     }
 
-    /**
-     * Delete all meetings on the day of the provided date
-     *
-     * @param date
-     */
-    public void deleteMeetingsOnDate(Date date) {
-        for (Meeting meeting : getMeetingsOnDate(date)) {
-            deleteMeeting(meeting);
-        }
-    }
 
     public static Date justGetDate(Date date) {
         Calendar cal = Calendar.getInstance();
@@ -214,58 +194,14 @@ public class Data extends SQLiteOpenHelper {
     }
 
     /**
-     * Tries to find a contact with the provided id stored in the phone's contacts, prompts for
-     * permission if it does not already have permission to access contacts.
-     * <p>
-     * In case it does not have permission at time of calling, returns null.
-     * <p>
-     * Also returns null if nothing found.
+     * Delete all meetings on the day of the provided date
      *
-     * @param activity
-     * @param id
-     * @return
+     * @param date
      */
-    public static Contact getContactById(Activity activity, String id) {
-        try {
-            Context context = activity.getApplicationContext();
-            // Check permissions
-            if (ContextCompat.checkSelfPermission(context,
-                    Manifest.permission.READ_CONTACTS)
-                    == PackageManager.PERMISSION_GRANTED) {
-                // Has permissions.
-
-                String[] needed = {
-                        ContactsContract.CommonDataKinds.Phone.NUMBER,
-                        ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
-                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID
-                };
-
-                Cursor cursor = context.getContentResolver().query(
-                        ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                        needed, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "= ?",
-                        new String[]{id}, null);
-
-                cursor.moveToFirst();
-
-                String name = cursor.getString(
-                        cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
-                );
-
-                String number = cursor.getString(
-                        cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
-                );
-
-                return new Contact(id, name, number);
-            } else {
-                ActivityCompat.requestPermissions(activity,
-                        new String[]{Manifest.permission.READ_CONTACTS},
-                        REQUEST_READ_CONTACTS
-                );
-                return null;
-            }
-        } catch (Exception e) {
-            Log.e("DATA", e.getStackTrace().toString());
-            return null;
+    public void deleteMeetingsOnDate(Date date) {
+        for (Meeting meeting : getMeetingsOnDate(date)) {
+            deleteMeeting(meeting);
         }
     }
 }
+

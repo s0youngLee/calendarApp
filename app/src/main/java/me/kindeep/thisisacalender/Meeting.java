@@ -96,25 +96,7 @@ public class Meeting implements Serializable {
         cal.setTime(date);
 
         int day = cal.get(Calendar.DAY_OF_WEEK);
-
-        // Postpone weekend to next weekend
-        // Sunday + 6
-        // Saturday + 1
-        // Postpone weekday to next available weekday.
-        // Friday + 3
-        // Else + 1
-
-        int addToDay = 0;
-
-        if(day == Calendar.SUNDAY) {
-            addToDay = 6;
-        } else if (day == Calendar.SATURDAY) {
-            addToDay = 1;
-        } else if(day == Calendar.FRIDAY) {
-            addToDay = 3;
-        } else {
-            addToDay = 1;
-        }
+        int addToDay = 1;
 
         cal.set(Calendar.DAY_OF_MONTH, cal.get(Calendar.DAY_OF_MONTH) + addToDay);
         Log.e("POSTPONE", cal.getTime() + "");
